@@ -1,0 +1,9 @@
+# Github (Standard)
+Host github.com
+	User rwingard
+	IdentityFile ~/.ssh/id_ed25519
+
+# Example for future Pop!_OS Laptop
+# Host pop-os
+# 	HostName 192.168.1.50
+# 	User rwingard
