@@ -3,6 +3,10 @@
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$(go env GOPATH)/bin
+export PATH="$HOME/.asdf/shims:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -111,9 +115,15 @@ alias l='lsd -l'
 alias la='lsd -a'
 alias lla='lsd -la'
 alias cat='batcat'
+alias tree='eza --tree --icons'
 
 # Trigger 'fastfetch' 'splash screen' on load/start
 fastfetch
 
 # Created by `pipx` on 2025-12-31 07:53:16
 export PATH="$PATH:/home/rwingard/.local/bin"
+
+# append completions to fpath
+fpath=("$HOME/.asdf/completions" $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit

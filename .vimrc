@@ -36,3 +36,49 @@ set expandtab       " Convert tabs to spaces
 
 " 5. Type 'jj' for <Esc>
 inoremap jj <Esc>
+
+" --- Fixing the non-auto-overwrite of closing parentheses.
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+
+" --- DAD MODE: LSP (INTELLISENSE) ---
+
+" 1. Use Tab to trigger completion
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" 2. Use Enter to confirm selection
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Helper function for the Tab logic
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" 3. Show documentation when pressing K (Like hovering mouse)
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" --- GO (GOLANG) CONFIG ---
+
+" 1. Map specific keys for Go files
+autocmd FileType go nmap <leader>r :!go run %<CR>  " Leader+r runs the file
+autocmd FileType go nmap <leader>b :!go build %<CR> " Leader+b builds it
+
+" 1. Teach Vim that the sequence (Esc + e) is actually Alt+e
+"    This uses 'execute' to safely handle the escape character.
+execute "set <M-e>=\<Esc>e"
+
+" 2. Now you can map Alt+e safely without breaking your normal Escape key
+inoremap <silent><expr> <M-e> coc#pum#visible() ? coc#pum#cancel() : "\<M-e>"
