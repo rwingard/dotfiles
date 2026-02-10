@@ -7,6 +7,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 export PATH="$HOME/.asdf/shims:$PATH"
+export PATH=$PATH:"$HOME/.config/emacs/bin"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -114,8 +115,9 @@ alias ls='lsd'
 alias l='lsd -l'
 alias la='lsd -a'
 alias lla='lsd -la'
-alias cat='batcat'
+alias cat='bat'
 alias tree='eza --tree --icons'
+alias reload='. /home/rwingard/.zshrc'
 
 # Trigger 'fastfetch' 'splash screen' on load/start
 fastfetch

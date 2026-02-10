@@ -82,3 +82,18 @@ execute "set <M-e>=\<Esc>e"
 
 " 2. Now you can map Alt+e safely without breaking your normal Escape key
 inoremap <silent><expr> <M-e> coc#pum#visible() ? coc#pum#cancel() : "\<M-e>"
+
+" --- Use Windows system clipboard ---
+let g:clipboard = {
+    \   'name': 'WslClipboard',
+    \   'copy': {
+    \      '+': 'clip.exe',
+    \      '*': 'clip.exe',
+    \    },
+    \   'paste': {
+    \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \   },
+    \   'cache_enabled': 0,
+    \ }
+
