@@ -8,6 +8,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 export PATH="$HOME/.asdf/shims:$PATH"
 export PATH=$PATH:"$HOME/.config/emacs/bin"
+export PATH=$PATH:"$HOME/.asdf/shims:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
